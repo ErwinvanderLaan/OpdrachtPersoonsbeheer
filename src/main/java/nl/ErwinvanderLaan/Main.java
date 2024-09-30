@@ -1,16 +1,16 @@
 // Goal of this file:
-// The user can create, and alter, a file of persons by adding and removing persons from a HashMap
+// The user can create, and alter, a file of persons by adding and removing them from an ArrayList
 
 package nl.ErwinvanderLaan;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        // The HashMap
-        HashMap<String, String> listOfPersons = new HashMap<>();
+        // The ArrayList
+        ArrayList<Person> persons = new ArrayList<>();
 
         // A loop so the user can continuously add or remove persons from the HashMap
         while (true) {
@@ -28,19 +28,14 @@ public class Main {
 
             // A switch for each of the three choices.
             switch(choice) {
-                // adding a person to the HashMap by typing their name and age.
-                // Name = key, Age = value.
+
                 case "1":
-                    // Asking the user to enter the name and age of the person to be added
+
+                    // Puts the entered name and age in the ArrayList.
                     String name = askForInput("Please enter the name of the person.");
-                    String age = askForInput("Please enter the age of the person.");
+                    int age = Integer.parseInt(askForInput("Please enter the age of the person."));
 
-                    System.out.println("The name added is: " + name);
-                    System.out.println("The age added is: " + age + "\n");
-
-                    // Puts the entered name and age in the HashMap.
-                    listOfPersons.put(name, age);
-
+                    persons.add(name, age);
                     break;
 
                 case "2":
@@ -49,14 +44,14 @@ public class Main {
                     System.out.println("Name to be removed is: " + removeName + "\n");
 
                     // Removes the entered name from the HashMap
-                    listOfPersons.remove(removeName);
+
 
                     break;
 
                 case "3":
                     // Show the total person file to the user by printing the Hashmap.
                     System.out.println("The list of added persons:");
-                    System.out.println(listOfPersons + "\n");
+
                     break;
 
                 case "q":
@@ -65,6 +60,7 @@ public class Main {
         }
 
     }
+    // Scanner method to ask for user input.
     public static String askForInput(String question) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(question);
