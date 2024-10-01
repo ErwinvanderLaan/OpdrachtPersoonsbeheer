@@ -4,6 +4,7 @@
 package nl.ErwinvanderLaan;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Main {
@@ -34,8 +35,14 @@ public class Main {
                     // Puts the entered name and age in the ArrayList.
                     String name = askForInput("Please enter the name of the person.");
                     int age = Integer.parseInt(askForInput("Please enter the age of the person."));
+                    String email = askForInput("Please enter the E-mail address of the person.");
+                    String city = askForInput("Please enter the name of the city where the person lives.");
+                    int bsn = Integer.parseInt(askForInput("Please enter the bsn of the person."));
+                    int phoneNumber = Integer.parseInt(askForInput("Please enter the phone number of the person."));
 
-                    persons.add(name, age);
+                    // Makes a person object and adds it to the ArrayList.
+                    Person person = new Person(name, age, email, city, bsn, phoneNumber);
+                    persons.add(person);
                     break;
 
                 case "2":
@@ -43,14 +50,30 @@ public class Main {
                     String removeName = askForInput("Please enter the name of the person you want to remove ");
                     System.out.println("Name to be removed is: " + removeName + "\n");
 
-                    // Removes the entered name from the HashMap
-
-
+                    //set to -1 because 0 is the first position in the list
+                    int found = -1;
+                    for(int x = 0; x < persons.size(); x++){
+                        //compare String objects with equals
+                      if (Objects.equals(persons.get(x).name, removeName)){
+                          found = x;
+                          break;
+                      }
+                    }
+                    if(found >= 0) {
+                        persons.remove(found);
+                        System.out.printf("Item %s was removed\n", removeName);
+                        break;
+                    }
+                    System.out.println("Item could not be removed because it was not found.");
                     break;
 
                 case "3":
-                    // Show the total person file to the user by printing the Hashmap.
+                    // Show the total person file to the user by printing the ArrayList.
                     System.out.println("The list of added persons:");
+
+                    for (var i : persons) {
+                        System.out.println(i);
+                    }
 
                     break;
 
